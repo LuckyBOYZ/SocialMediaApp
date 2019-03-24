@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<form method="post" id="addUser" name="addUser">
+    <div>
+        <label for="login">Login: </label>
+        <input type="text" id="login" maxlength="20" required>
+    </div>
+    <div>
+        <label for="hasło">Hasło: </label>
+        <input type="password" id="hasło" maxlength="30" required>
+    </div>
+    <div>
+        <label for="powtórz-hasło">Powtórz hasło: </label>
+        <input type="password" id="powtórz-hasło" maxlength="30" required>
+    </div>
+    <div>
+        <label for="opis">Opis: </label>
+        <input type="text" id="opis" maxlength="100">
+    </div>
+    <input type="button" value="Zarejestruj">
+</form>
+</body>
+</html>

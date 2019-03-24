@@ -22,10 +22,10 @@ public class User {
     private String password;
     @Range(max = 100)
     private String accountDescription;
-    @NotNull
-    private AccountStatus accountStatus;
-    @NotNull
-    private AccountType accountType;
+//    @NotNull
+//    private AccountStatus accountStatus;
+//    @NotNull
+//    private AccountType accountType;
 }
 
 enum AccountStatus {
