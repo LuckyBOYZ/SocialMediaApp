@@ -2,39 +2,70 @@ package pl.lukaszsuma.socialmediaapp.model;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Data
-public class User {
+@Entity
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Range(max = 20)
     private String login;
     @NotNull
-    @Range(max = 30)
     private String password;
-    @Range(max = 100)
-    private String accountDescription;
-//    @NotNull
-//    private AccountStatus accountStatus;
-//    @NotNull
-//    private AccountType accountType;
-}
+    @NotNull
+    private String email;
+    @Enumerated(EnumType.STRING)
+    private AccountRole role;
+    @Enumerated(EnumType.STRING)
+    private AccountType type;
 
-enum AccountStatus {
-    AKTYWNY,
-    NIEAKTYWNY,
-    ZABLOKOWANY
-}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
-enum AccountType {
-    PUBLICZNE,
-    PRYWATNE
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public enum AccountRole {
+        ADMIN,
+        USER
+    }
+
+    public enum AccountType {
+        PUBLIC,
+        PRIVATE
+    }
+
 }
