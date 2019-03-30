@@ -1,12 +1,15 @@
 package pl.lukaszsuma.socialmediaapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -19,6 +22,7 @@ public class User implements UserDetails {
     private Long id;
     @NotEmpty
     private String login;
+    @JsonIgnore
     @NotEmpty
     private String password;
     @NotEmpty
@@ -32,12 +36,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return login;
     }
 
     @Override

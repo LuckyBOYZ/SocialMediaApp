@@ -30,4 +30,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findByLogin(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Login: " + username + " does not exist"));
     }
+
+    public User getByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByLogin(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Login: " + username + " does not exist"));
+    }
 }

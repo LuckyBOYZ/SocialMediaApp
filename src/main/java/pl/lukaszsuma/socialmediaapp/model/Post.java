@@ -3,16 +3,17 @@ package pl.lukaszsuma.socialmediaapp.model;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name = "posts")
 public class Post {
-    private String post;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String message;
     @CreationTimestamp
     private LocalDate creationDate;
     @OneToOne

@@ -15,16 +15,34 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form>
-    <textarea rows="4" class="card col-6" placeholder="Napisz co u Ciebie słychać?"></textarea>
-    <input type="button" class="btn btn-primary mt-2 mb-4" value="Opublikuj">
-</form>
-</div>
-<div class="card col-6" id="div-posts">
+<div id="user">
+    <form>
+        <textarea rows="4" class="card col-6" placeholder="Napisz co u Ciebie słychać?" id="div-with-message-to-publicate"></textarea>
+        <input type="button" class="btn btn-primary mt-2 mb-4" value="Opublikuj" id="button-to-publicate">
+    </form>
+    <!--zamiast tabeli - div ze wszystkimi postami-->
+    <!--<div id="div-posts">-->
+
+    <!--</div>-->
+
+    <!--szablon dodawanego posta-->
+    <!--<div class="card col-6" id="div-post-template">-->
     <div class="card-body">
-        <h5 class="card-title">Tytył posta</h5>
+        <h5 class="card-title" >Login</h5>
+        <p class="date-cell">Data</p>
+        <p class="card-text">Wiadomość</p>
+        <h5 class="card-title" >Login</h5>
+        <p class="date-cell">Data</p>
+        <p class="card-text">Wiadomość</p>
+        <h5 class="card-title" >Login</h5>
+        <p class="date-cell">Data</p>
+        <p class="card-text">Wiadomość</p>
+        <h5 class="card-title" >Login</h5>
+        <p class="date-cell">Data</p>
         <p class="card-text">Wiadomość</p>
     </div>
+    <!--</div>-->
+    <input type="button" class="btn btn-primary mt-2 mb-4" id="button-logout" value="Logout">
 </div>
 </body>
 </html>

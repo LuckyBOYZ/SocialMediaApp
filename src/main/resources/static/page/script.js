@@ -5,6 +5,7 @@ $.ajax({
         $("#form-login").hide();
         $("#user").show();
         $("#div-register").hide();
+        allPosts();
     },
     error: function () {
         firstPage();
@@ -16,6 +17,7 @@ $("#button-form-register").click(function () {
     $("#user").hide();
     $("#div-register").show();
 });
+
 $("#button-register").click(function () {
     if ($("#email:valid").length === 0) {
         console.log("invalid form");
@@ -65,10 +67,31 @@ $("#button-zaloguj").click(function () {
             $("#form-login").hide();
             $("#user").show();
             $("#div-register").hide();
+            allPosts();
         },
         error: function () {
             alert("Błędne hasło lub login");
             firstPage();
+        }
+    })
+});
+
+$("#button-to-publicate").click(function () {
+    const message = $("#div-with-message-to-publicate").val();
+    const messageJSON = {
+        message: message
+    };
+    $.ajax({
+        method: "post",
+        url: "http://localhost:8080/user",
+        data: JSON.stringify(messageJSON),
+        contentType: "application/json",
+        success: function () {
+            allPosts();
+            $("#div-with-message-to-publicate").val("");
+        },
+        error: function () {
+            alert("very very bad")
         }
     })
 });
@@ -86,13 +109,35 @@ $("#button-logout").click(function () {
 });
 
 $("#div-posts").click(function () {
-    
+
 });
 
 function firstPage() {
     $("#div-register").hide();
     $("#user").hide();
 }
-function allPosts(posts) {
 
+function allPosts() {
+    console.log("post requets");
+    $.ajax({
+        method: "get",
+        url: "http://localhost:8080/user",
+        success: function (posts) {
+            console.log(posts);
+            $("#div-posts").empty();
+            const $divTemplate = $("#card-body-template");
+            console.log($divTemplate);
+            for (let i = posts.length -1; i > -1; i--) {
+                const post = posts[i];
+                const $row = $divTemplate.clone();
+                $row.show();
+                $row.removeAttr("id");
+                $row.find(".card-title").text(post.user.login);
+                $row.find(".card-text").text(post.message);
+                $row.find(".date-cell").text(post.creationDate);
+                console.log($row);
+                $("#div-posts").append($row);
+            }
+        }
+    })
 }
