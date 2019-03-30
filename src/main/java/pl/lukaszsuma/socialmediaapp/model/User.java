@@ -1,13 +1,13 @@
 package pl.lukaszsuma.socialmediaapp.model;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,16 +17,18 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotEmpty
     private String login;
-    @NotNull
+    @NotEmpty
     private String password;
-    @NotNull
+    @NotEmpty
     private String email;
     @Enumerated(EnumType.STRING)
     private AccountRole role;
     @Enumerated(EnumType.STRING)
     private AccountType type;
+    @OneToMany
+    private List<Post> posts;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
